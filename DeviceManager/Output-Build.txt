@@ -1,0 +1,6 @@
+﻿1>------ Clean started: Project: DeviceManager.WinPhone, Configuration: Debug Any CPU ------
+2>------ Skipped Clean: Project: DeviceManager.iOS, Configuration: Debug iPhone ------
+2>Project not selected to build for this solution configuration 
+3>------ Clean started: Project: DeviceManager.Droid, Configuration: Debug Any CPU ------
+4>------ Clean started: Project: DeviceManager, Configuration: Debug Any CPU ------
+========== Clean: 3 succeeded, 0 failed, 1 skipped ==========
