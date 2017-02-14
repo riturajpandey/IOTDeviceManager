@@ -43,7 +43,7 @@ namespace DeviceManager.Droid.Views
 
         public async void CallLoginCommand()
         {
-            bool result = await _registrationViewModel.RegisterProcess();
+            bool result =  _registrationViewModel.RegisterProcess();
             if (result == true)
             {
                 App.token = _registrationViewModel.registrationNumber;

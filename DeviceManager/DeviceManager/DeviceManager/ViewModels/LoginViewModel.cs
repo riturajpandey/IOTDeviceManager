@@ -1,4 +1,5 @@
-﻿using MvvmCross.Core.ViewModels;
+﻿using Acr.UserDialogs;
+using MvvmCross.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,26 +54,39 @@ namespace DeviceManager.ViewModels
             //TLPWEBServices.GetUser_JSON("JDddd");
             if (EmailAddress.Length == 0)
             {
-                DialogService.Alert("Please enter your email address.", null, "OK");
+                if (App.DeviceType == "droid" || App.DeviceType == "IOS")
+                {
+                    DialogService.Alert("Please enter your email address.", null, "OK");
+                }
                 return result;
             }
             else if (Password.Length == 0)
             {
-
-                DialogService.Alert("Please enter your password.", null, "OK");
+                if (App.DeviceType == "droid" || App.DeviceType == "IOS")
+                {
+                    DialogService.Alert("Please enter your password.", null, "OK");
+                }
                 return result;
             }
-            DialogService.ShowLoading("Loading...", Acr.UserDialogs.MaskType.Black);
-
+            if (App.DeviceType == "droid" || App.DeviceType == "IOS")
+            {
+                DialogService.ShowLoading("Loading...", Acr.UserDialogs.MaskType.Black);
+            }
             try
             {
                 //TODO: Call async method.
-                DialogService.HideLoading();
+                if (App.DeviceType == "droid" || App.DeviceType == "IOS")
+                {
+                    DialogService.HideLoading();
+                }
             }
             catch (Exception ex)
             {
-                DialogService.HideLoading();
-                DialogService.Alert("Something went wrong, please try again", null, "OK");
+                if (App.DeviceType == "droid" || App.DeviceType == "IOS")
+                {
+                    DialogService.HideLoading();
+                    DialogService.Alert("Something went wrong, please try again", null, "OK");
+                }
                 result = false;
             }
             return result;

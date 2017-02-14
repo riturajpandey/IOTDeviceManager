@@ -12,9 +12,31 @@ namespace DeviceManager.iOS
 	[Register ("LoginView")]
 	partial class LoginView
 	{
+		[Outlet]
+		UIKit.UIButton btnSign { get; set; }
+
+		[Outlet]
+		UIKit.UITextField txtPassword { get; set; }
+
+		[Outlet]
+		UIKit.UITextField txtUserName { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (btnSign != null) {
+				btnSign.Dispose ();
+				btnSign = null;
+			}
+
+			if (txtUserName != null) {
+				txtUserName.Dispose ();
+				txtUserName = null;
+			}
+
+			if (txtPassword != null) {
+				txtPassword.Dispose ();
+				txtPassword = null;
+			}
 		}
 	}
 }

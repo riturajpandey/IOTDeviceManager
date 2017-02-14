@@ -1,10 +1,10 @@
 ﻿using System;
-
+using MvvmCross.iOS.Views;
 using UIKit;
 
 namespace DeviceManager.iOS
 {
-	public partial class WelcomePageView : UIViewController
+	public partial class WelcomePageView : MvxViewController
 	{
 		public WelcomePageView() : base("WelcomePageView", null)
 		{
@@ -13,6 +13,7 @@ namespace DeviceManager.iOS
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
+			this.NavigationController.SetNavigationBarHidden(true,false);
 			// Perform any additional setup after loading the view, typically from a nib.
 		}
 

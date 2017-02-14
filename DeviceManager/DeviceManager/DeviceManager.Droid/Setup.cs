@@ -23,8 +23,8 @@ namespace DeviceManager.Droid
 
         protected override IMvxApplication CreateApp()
         {
-            //App.token = "0"; // if uesr string is Not Register
-
+            App.token = "0"; // if uesr string is Not Register
+            App.DeviceType = "droid";
             //App.token = "1"; // if uesr string is Register
 
             return new DeviceManager.App();

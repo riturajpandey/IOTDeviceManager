@@ -1,10 +1,13 @@
-﻿using MvvmCross.Core.ViewModels;
+﻿
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Popups;
 
 namespace DeviceManager.ViewModels
 {
@@ -31,35 +34,49 @@ namespace DeviceManager.ViewModels
 
         private async void RegisterEvent()
         {
-            bool result = await RegisterProcess();
+            bool result = RegisterProcess();
             if (result)
             {
                 ShowViewModel<WelcomePageViewModel>();
             }
         }
 
-        public async Task<bool> RegisterProcess()
+        public bool RegisterProcess()
         {
             bool result = true;
             //TLPWEBServices.GetUser_JSON("JDddd");
             if (registrationNumber.Length == 0)
             {
-                DialogService.Alert("Please enter your Registration Number.", null, "OK");
+                if (App.DeviceType == "droid" || App.DeviceType == "IOS")
+                {
+                    DialogService.Alert("Please enter your Registration Number.", null, "OK");
+                }
                 result = false;
             }
             App.token = registrationNumber;
-            DialogService.ShowLoading("Loading...", Acr.UserDialogs.MaskType.Black);
+            if (App.DeviceType == "droid" || App.DeviceType == "IOS")
+            {
+                DialogService.ShowLoading("Loading...", Acr.UserDialogs.MaskType.Black);
+            }
+            //MessageDialog msgbox_ = new MessageDialog("Loading...");
+            //msgbox_.ShowAsync();
 
             try
             {
                 //TODO: Call async method.
-                DialogService.HideLoading();
+                if (App.DeviceType == "droid" || App.DeviceType == "IOS")
+                {
+                    DialogService.HideLoading();
+                }
             }
             catch (Exception ex)
             {
-                DialogService.HideLoading();
-                DialogService.Alert("Something went wrong, please try again", null, "OK");
-                result = false;
+                if (App.DeviceType == "droid" || App.DeviceType == "IOS")
+                {
+                    DialogService.HideLoading();
+                    DialogService.Alert("Something went wrong, please try again", null, "OK");
+                    result = false;
+                }
             }
             return result;
         }

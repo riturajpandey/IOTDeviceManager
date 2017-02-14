@@ -1,0 +1,59 @@
+﻿<views:MvxWindowsPage
+    xmlns:views="using:MvvmCross.WindowsCommon.Views"
+    x:Class="DeviceManager.WinPhone.Views.LoginView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DeviceManager.WinPhone.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" Height="300" VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Image Grid.Row="0" Source="/Assets/Xamagon.png" Height="150" />
+            </Grid>
+
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0" Margin="1,0,1,1" Background="LightGray">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition ></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBox Text="{Binding Hello, Mode=TwoWay}" PlaceholderText="USERNAME" Background="LightGray" Height="Auto" BorderBrush="Transparent" Grid.Row="0" Grid.Column="0"/>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="0" Margin="1,1,1,1" Background="LightGray">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <PasswordBox  PlaceholderText="PASSWORD" Background="LightGray" Height="40" BorderBrush="Transparent"/>
+        </Grid>
+
+        <Grid Grid.Row="3" Grid.Column="0"  Height="70" VerticalAlignment="Bottom" Margin="0,1,0,1" Background="#fecd57">
+            <Button Content="SIGN IN" VerticalAlignment="Center" Height="70" Width="450" Background="#fecd57" HorizontalAlignment="Center" BorderThickness="0" Command="{Binding SignInCommand}"></Button>
+        </Grid>
+    </Grid>
+
+
+
+</views:MvxWindowsPage>

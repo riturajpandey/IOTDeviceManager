@@ -21,6 +21,7 @@ namespace DeviceManager.ViewModels
         {
             get
             {
+                //var str = Mvx.Resolve<Acr.UserDialogs.IUserDialogs>();
                 return Mvx.Resolve<Acr.UserDialogs.IUserDialogs>();
             }
         }

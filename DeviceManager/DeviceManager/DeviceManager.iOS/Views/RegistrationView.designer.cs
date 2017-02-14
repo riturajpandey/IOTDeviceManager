@@ -12,9 +12,23 @@ namespace DeviceManager.iOS
 	[Register ("RegistrationView")]
 	partial class RegistrationView
 	{
+		[Outlet]
+		UIKit.UIButton btnReg { get; set; }
+
+		[Outlet]
+		UIKit.UITextField txtName { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (btnReg != null) {
+				btnReg.Dispose ();
+				btnReg = null;
+			}
+
+			if (txtName != null) {
+				txtName.Dispose ();
+				txtName = null;
+			}
 		}
 	}
 }
