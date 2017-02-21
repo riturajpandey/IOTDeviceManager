@@ -1,6 +1,5 @@
-﻿
-using Acr.UserDialogs;
-using Cirrious.CrossCore;
+﻿using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,9 +18,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
-
-namespace DeviceManager.WinPhone
+namespace DeviceManager.UWP
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
@@ -29,7 +26,6 @@ namespace DeviceManager.WinPhone
     public sealed partial class App : Application
     {
         private TransitionCollection transitions;
-
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -37,18 +33,23 @@ namespace DeviceManager.WinPhone
         public App()
         {
             this.InitializeComponent();
-            this.Suspending += this.OnSuspending;
+            this.Suspending += OnSuspending;
         }
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
-        /// will be used when the application is launched to open a specific file, to display
-        /// search results, and so forth.
+        /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            var rootFrame = Window.Current.Content as Frame;
+#if DEBUG
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                this.DebugSettings.EnableFrameRateCounter = true;
+            }
+#endif
+            Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -57,7 +58,9 @@ namespace DeviceManager.WinPhone
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
 
-                if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                rootFrame.NavigationFailed += OnNavigationFailed;
+
+                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Load state from previously suspended application
                 }
@@ -68,14 +71,14 @@ namespace DeviceManager.WinPhone
 
             if (rootFrame.Content == null)
             {
-                // When the navigation stack isn't restored navigate to the first page,
-                // configuring the new page by passing required information as a navigation
-                // parameter
-
+                //// When the navigation stack isn't restored navigate to the first page,
+                //// configuring the new page by passing required information as a navigation
+                //// parameter
+                //rootFrame.Navigate(typeof(MainPage), e.Arguments);
                 var setup = new Setup(rootFrame);
                 setup.Initialize();
-                //Acr.UserDialogs.UserDialogs.Init(this);
-                var start = MvvmCross.Platform.Mvx.Resolve<MvvmCross.Core.ViewModels.IMvxAppStart>();
+
+                var start = Mvx.Resolve<IMvxAppStart>();
                 start.Start();
             }
             // Ensure the current window is active
@@ -83,15 +86,20 @@ namespace DeviceManager.WinPhone
         }
 
         /// <summary>
-        /// Restores the content transitions after the app has launched.
+        /// Invoked when Navigation to a certain page fails
         /// </summary>
-        /// <param name="sender">The object where the handler is attached.</param>
-        /// <param name="e">Details about the navigation event.</param>
+        /// <param name="sender">The Frame which failed navigation</param>
+        /// <param name="e">Details about the navigation failure</param>
+
         private void RootFrame_FirstNavigated(object sender, NavigationEventArgs e)
         {
             var rootFrame = sender as Frame;
             rootFrame.ContentTransitions = this.transitions ?? new TransitionCollection() { new NavigationThemeTransition() };
             rootFrame.Navigated -= this.RootFrame_FirstNavigated;
+        }
+        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        {
+            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
 
         /// <summary>
@@ -104,8 +112,7 @@ namespace DeviceManager.WinPhone
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-
-            // TODO: Save application state and stop any background activity
+            //TODO: Save application state and stop any background activity
             deferral.Complete();
         }
     }

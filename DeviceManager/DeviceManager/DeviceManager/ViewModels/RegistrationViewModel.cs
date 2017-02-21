@@ -1,4 +1,4 @@
-﻿
+﻿using Acr.UserDialogs;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using System;
@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Popups;
+//using Windows.UI.Popups;
 
 namespace DeviceManager.ViewModels
 {
@@ -50,6 +51,10 @@ namespace DeviceManager.ViewModels
                 if (App.DeviceType == "droid" || App.DeviceType == "IOS")
                 {
                     DialogService.Alert("Please enter your Registration Number.", null, "OK");
+                }
+                else
+                {
+                    //UserDialogs.Instance.Alert("Please enter your Registration Number.");
                 }
                 result = false;
             }

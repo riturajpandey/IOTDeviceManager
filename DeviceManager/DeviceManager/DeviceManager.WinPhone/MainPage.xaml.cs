@@ -27,7 +27,7 @@ namespace DeviceManager.WinPhone
         public MainPage()
         {
             this.InitializeComponent();
-
+            //Acr.MvvmCross.Plugins.UserDialogs.PluginLoader.Instance.GetType();
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
@@ -45,7 +45,7 @@ namespace DeviceManager.WinPhone
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
-           
+
         }
     }
 }
