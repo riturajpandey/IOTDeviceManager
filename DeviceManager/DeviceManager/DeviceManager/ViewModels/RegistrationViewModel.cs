@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Popups;
-//using Windows.UI.Popups;
 
 namespace DeviceManager.ViewModels
 {
     public class RegistrationViewModel : BaseViewModel
     {
+
+
         public RegistrationViewModel()
         { }
 
@@ -35,14 +36,14 @@ namespace DeviceManager.ViewModels
 
         private async void RegisterEvent()
         {
-            bool result = RegisterProcess();
+            bool result = await RegisterProcess();
             if (result)
             {
                 ShowViewModel<WelcomePageViewModel>();
             }
         }
 
-        public bool RegisterProcess()
+        public async Task<bool> RegisterProcess()
         {
             bool result = true;
             //TLPWEBServices.GetUser_JSON("JDddd");
@@ -71,6 +72,9 @@ namespace DeviceManager.ViewModels
                 //TODO: Call async method.
                 if (App.DeviceType == "droid" || App.DeviceType == "IOS")
                 {
+                    var resultAPI = await deviceAPItManager.PostRegistration(registrationNumber);
+                    // TODO : Perform the result accordly API Result.
+
                     DialogService.HideLoading();
                 }
             }

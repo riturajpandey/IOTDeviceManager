@@ -11,7 +11,7 @@ namespace DeviceManager.Managers.DeviceAPIManager
 {
     public interface IDeviceAPIManager
     {
-      Task<ObservableCollection<ItemModel>> GetItemsBySearch(string SearchText);
+        Task<ObservableCollection<ItemModel>> PostRegistration(string regNumber);
         #region Response
         /// <summary>
         /// 

@@ -1,4 +1,6 @@
-﻿using MvvmCross.Core.ViewModels;
+﻿using DeviceManager.Managers.DeviceAPIManager;
+using DeviceManager.Managers.SettingsManager;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using System;
 using System.Collections.Generic;
@@ -10,8 +12,16 @@ namespace DeviceManager.ViewModels
 {
     public class BaseViewModel : MvxViewModel
     {
+        protected readonly IDeviceAPIManager deviceAPItManager;
+        protected readonly ISettingsManager settingsManager;
+        private readonly Dictionary<string, object> PropertyValues = new Dictionary<string, object>();
+
         public BaseViewModel()
-        { }
+        {
+            deviceAPItManager = Mvx.Resolve<IDeviceAPIManager>();
+            //deviceAPItManager = SimpleIoc.Default.GetInstance<IDeviceAPIManager>();
+            settingsManager = Mvx.Resolve<ISettingsManager>();
+        }
 
         /// <summary>
         /// TODO: Register the dialog popups

@@ -39,13 +39,12 @@ namespace DeviceManager.Managers.DeviceAPIManager
             _settingsManager = settingsManager;
         }
         #endregion
-        public async Task<ObservableCollection<ItemModel>> GetItemsBySearch(string SearchText)
+        public async Task<ObservableCollection<ItemModel>> PostRegistration(string regNumber)
         {
             bool IsNetwork = IsConnected();
             if (IsNetwork)
             {
-
-                var url = string.Format("{0}{1}", _settingsManager.ApiHost, SearchText);
+                var url = string.Format("{0}{1}", _settingsManager.ApiHost, regNumber);
                 return await _apiProvider.Get<ObservableCollection<ItemModel>>(url);
             }
             else
@@ -54,6 +53,8 @@ namespace DeviceManager.Managers.DeviceAPIManager
             }
             return null;
         }
+
+
         /// <summary>
         /// 
         /// </summary>
